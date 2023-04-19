@@ -5,6 +5,9 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 400;
+        -ms-overflow-style: none;
+        scrollbar-width: none;  
+        overflow: -moz-scrollbars-none;
     }
     button {
         outline: none;
@@ -53,6 +56,9 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         padding-top: 30px;
     }
-`
+    ::-webkit-scrollbar {
+         display: none;
+    }
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
