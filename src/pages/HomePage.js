@@ -64,6 +64,9 @@ const Header = styled.header`
   margin-bottom: 15px;
   font-size: 26px;
   color: white;
+  svg{
+    cursor: pointer;
+  }
 `
 const TransactionsContainer = styled.article`
   flex-grow: 1;

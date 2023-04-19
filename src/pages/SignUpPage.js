@@ -33,7 +33,7 @@ export default function SignUpPage() {
       email: form.email,
       senha: form.senha,
     };
-    const promise = api.post("/users", signup);
+    const promise = api.post("/sign-up", signup);
     promise.then(signUpSuccess);
     promise.catch(signUpFailed);
   }
@@ -43,18 +43,17 @@ export default function SignUpPage() {
   }
 
   function signUpFailed(err) {
-    console.log(err);
     if(err.response.status === 409){
       alert("Email já cadastrado.");
     }else if(err.response.status === 422){
-      alert("Confira seus dados. Todos os campos são obrigatórios, o email deve ter formato válido e a senha deve ter no mínimo 3 caracteres.");
+      alert(err.response.data);
     }else{
       alert("Erro inesperado. Tente novamente.");
     }
   }
 
   return (
-    <SingUpContainer>
+    <SignUpContainer>
       <form onSubmit={signup}>
         <MyWalletLogo />
         <input
@@ -93,11 +92,11 @@ export default function SignUpPage() {
       </form>
 
       <Link to="/">Já tem uma conta? Entre agora!</Link>
-    </SingUpContainer>
+    </SignUpContainer>
   );
 }
 
-const SingUpContainer = styled.section`
+const SignUpContainer = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
