@@ -1,13 +1,54 @@
-import styled from "styled-components"
-import { BiExit } from "react-icons/bi"
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import styled from "styled-components";
+import { BiExit } from "react-icons/bi";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import axios from "axios";
+import UserContext from "../contexts/UserContext";
 
 export default function HomePage() {
+  const [user, setUser] = useContext(UserContext);
+
+  const api = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("user");
+    if (userToken === null) {
+      navigate("/");
+    }else{
+      setUser(JSON.parse(userToken));
+    }
+  }, []);
+
+  function logout() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user}`,
+      },
+    };
+    const promise = api.delete("/logout", config);
+    promise.then(lougoutSuccess);
+    promise.catch(logoutFailed);
+  }
+
+  function lougoutSuccess(res){
+    localStorage.clear();
+    navigate("/");
+  }
+
+  function logoutFailed(err){
+    alert("Erro inesperado. Tente novamente.")
+  }
+
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, Fulano</h1>
-        <BiExit />
+        <BiExit onClick={logout} />
       </Header>
 
       <TransactionsContainer>
@@ -35,27 +76,30 @@ export default function HomePage() {
         </article>
       </TransactionsContainer>
 
-
       <ButtonsContainer>
         <button>
           <AiOutlinePlusCircle />
-          <p>Nova <br /> entrada</p>
+          <p>
+            Nova <br /> entrada
+          </p>
         </button>
         <button>
           <AiOutlineMinusCircle />
-          <p>Nova <br />saída</p>
+          <p>
+            Nova <br />
+            saída
+          </p>
         </button>
       </ButtonsContainer>
-
     </HomeContainer>
-  )
+  );
 }
 
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 50px);
-`
+`;
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -64,10 +108,10 @@ const Header = styled.header`
   margin-bottom: 15px;
   font-size: 26px;
   color: white;
-  svg{
+  svg {
     cursor: pointer;
   }
-`
+`;
 const TransactionsContainer = styled.article`
   flex-grow: 1;
   background-color: #fff;
@@ -79,19 +123,19 @@ const TransactionsContainer = styled.article`
   justify-content: space-between;
   article {
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;
     strong {
       font-weight: 700;
       text-transform: uppercase;
     }
   }
-`
+`;
 const ButtonsContainer = styled.section`
   margin-top: 15px;
   margin-bottom: 0;
   display: flex;
   gap: 15px;
-  
+
   button {
     width: 50%;
     height: 115px;
@@ -104,12 +148,12 @@ const ButtonsContainer = styled.section`
       font-size: 18px;
     }
   }
-`
+`;
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
   color: ${(props) => (props.color === "positivo" ? "green" : "red")};
-`
+`;
 const ListItemContainer = styled.li`
   display: flex;
   justify-content: space-between;
@@ -121,4 +165,4 @@ const ListItemContainer = styled.li`
     color: #c6c6c6;
     margin-right: 10px;
   }
-`
+`;

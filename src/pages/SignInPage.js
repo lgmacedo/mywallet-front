@@ -40,7 +40,6 @@ export default function SignInPage() {
 
   function loginSuccess(res) {
     setUser(res.data);
-    console.log(res.data);
     localStorage.setItem("user", JSON.stringify(res.data));
     navigate("/home");
   }
