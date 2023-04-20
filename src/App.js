@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, RedirectFunction } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import HomePage from "./pages/HomePage";

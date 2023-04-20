@@ -32,8 +32,7 @@ export default function SignInPage() {
 
   function login(e) {
     e.preventDefault();
-    const login = { email: form.email, senha: form.senha };
-    const promise = api.post("/sign-in", login);
+    const promise = api.post("/sign-in", form);
     promise.then(loginSuccess);
     promise.catch(loginFailed);
   }

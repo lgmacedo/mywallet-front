@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BiExit } from "react-icons/bi";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
@@ -85,7 +85,7 @@ export default function HomePage() {
       <TransactionsContainer show={transactions.length !== 0}>
         <ul>
           {transactions.map((t) => (
-            <ListItemContainer>
+            <ListItemContainer key={t._id}>
               <div>
                 <span>{t.data}</span>
                 <strong>{t.titulo}</strong>
@@ -110,17 +110,21 @@ export default function HomePage() {
 
       <ButtonsContainer>
         <button>
-          <AiOutlinePlusCircle />
-          <p>
-            Nova <br /> entrada
-          </p>
+          <Link to="/nova-transacao/entrada">
+            <AiOutlinePlusCircle />
+            <p>
+              Nova <br /> entrada
+            </p>
+          </Link>
         </button>
         <button>
-          <AiOutlineMinusCircle />
-          <p>
-            Nova <br />
-            saída
-          </p>
+          <Link to="/nova-transacao/saida">
+            <AiOutlineMinusCircle />
+            <p>
+              Nova <br />
+              saída
+            </p>
+          </Link>
         </button>
       </ButtonsContainer>
     </HomeContainer>
