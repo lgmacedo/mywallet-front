@@ -2,7 +2,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  RedirectFunction,
 } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
@@ -14,7 +13,6 @@ import UserContext from "./contexts/UserContext";
 import TransactionEditPage from "./pages/TransactionEditPage";
 
 export default function App() {
-  window.scrollTo(0, 0);
   const [user, setUser] = useState({});
 
   return (

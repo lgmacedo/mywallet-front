@@ -57,9 +57,6 @@ const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar {
          display: none;
     }
-    body{
-        overflow: hidden;
-    }
 `;
 
 export default GlobalStyle;
