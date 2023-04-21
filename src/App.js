@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route, RedirectFunction } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  RedirectFunction,
+} from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import HomePage from "./pages/HomePage";
@@ -6,6 +11,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import TransactionsPage from "./pages/TransactionPage";
 import UserContext from "./contexts/UserContext";
+import TransactionEditPage from "./pages/TransactionEditPage";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -21,6 +27,10 @@ export default function App() {
             <Route
               path="/nova-transacao/:tipo"
               element={<TransactionsPage />}
+            />
+            <Route
+              path="/editar-registro/:tipo"
+              element={<TransactionEditPage />}
             />
           </Routes>
         </UserContext.Provider>
