@@ -49,8 +49,8 @@ export default function SignInPage() {
 
   return (
     <SignInContainer>
+      <MyWalletLogo />
       <form onSubmit={login}>
-        <MyWalletLogo />
         <input
           required
           placeholder="E-mail"
@@ -81,4 +81,11 @@ const SignInContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  form{
+    margin-top: 30px;
+  }
+  a{
+    margin-top: 30px;
+    font-weight: 700;
+  }
 `;

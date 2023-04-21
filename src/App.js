@@ -14,6 +14,7 @@ import UserContext from "./contexts/UserContext";
 import TransactionEditPage from "./pages/TransactionEditPage";
 
 export default function App() {
+  window.scrollTo(0, 0);
   const [user, setUser] = useState({});
 
   return (

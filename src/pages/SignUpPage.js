@@ -54,8 +54,8 @@ export default function SignUpPage() {
 
   return (
     <SignUpContainer>
+      <MyWalletLogo />
       <form onSubmit={signup}>
-        <MyWalletLogo />
         <input
           required
           name="nome"
@@ -102,4 +102,11 @@ const SignUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  form{
+    margin-top: 30px;
+  }
+  a{
+    margin-top: 30px;
+    font-weight: 700;
+  }
 `;
