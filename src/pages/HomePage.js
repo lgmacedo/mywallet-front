@@ -75,7 +75,7 @@ export default function HomePage() {
     sumValores(transactions, (t) => t.tipo === "entrada") -
     sumValores(transactions, (t) => t.tipo === "saida");
 
-  function editarRegistro(id, tipo){
+  function editarRegistro(id, tipo) {
     navigate(`/editar-registro/${tipo}?id=${id}`);
   }
 
@@ -92,7 +92,9 @@ export default function HomePage() {
             <ListItemContainer key={t._id}>
               <div>
                 <span>{t.data}</span>
-                <strong onClick={()=>editarRegistro(t._id, t.tipo)}>{t.titulo}</strong>
+                <strong onClick={() => editarRegistro(t._id, t.tipo)}>
+                  {t.titulo}
+                </strong>
               </div>
               <Value color={t.tipo}>
                 {t.valor.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
@@ -148,6 +150,10 @@ const Header = styled.header`
   margin-bottom: 15px;
   font-size: 26px;
   color: white;
+  h1 {
+    font-weight: 700;
+    font-size: 26px;
+  }
   svg {
     cursor: pointer;
   }
@@ -236,7 +242,7 @@ const ListItemContainer = styled.li`
     color: #c6c6c6;
     margin-right: 10px;
   }
-  strong{
+  strong {
     cursor: pointer;
   }
 `;

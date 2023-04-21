@@ -93,6 +93,8 @@ const TransactionsContainer = styled.main`
   justify-content: flex-start;
 
   h1 {
+    font-weight: 700;
+    font-size: 26px;
     align-self: flex-start;
     margin-bottom: 40px;
   }

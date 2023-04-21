@@ -113,5 +113,7 @@ const TransactionEditContainer = styled.main`
   h1 {
     align-self: flex-start;
     margin-bottom: 40px;
+    font-size: 26px;
+    font-weight: 700;
   }
 `;

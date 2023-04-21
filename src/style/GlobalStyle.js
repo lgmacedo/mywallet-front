@@ -22,8 +22,6 @@ const GlobalStyle = createGlobalStyle`
         padding: 12px;
     }
     h1 {
-        font-weight: 700;
-        font-size: 26px;
         color: white;
     }
     input {
