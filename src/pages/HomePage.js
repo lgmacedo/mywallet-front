@@ -33,7 +33,7 @@ export default function HomePage() {
       promise.then(transactionsSuccess);
       promise.catch(transactionsFailed);
     }
-  }, [transactions]);
+  }, []);
 
   function transactionsSuccess(res) {
     const { nome, transactions } = res.data;
@@ -87,7 +87,7 @@ export default function HomePage() {
         },
       };
       const promise = api.delete(`/delete-transaction/${id}`, config);
-      promise.then(setTransactions([...transactions]));
+      promise.then(window.location.reload());
       promise.catch((err) => alert(err.response.data));
     }
   }
