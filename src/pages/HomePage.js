@@ -87,7 +87,7 @@ export default function HomePage() {
         },
       };
       const promise = api.delete(`/delete-transaction/${id}`, config);
-      promise.then(navigate("/"));
+      promise.then(navigate("/home"));
       promise.catch((err) => alert(err.response.data));
     }
   }
