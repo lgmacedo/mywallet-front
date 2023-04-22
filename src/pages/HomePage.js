@@ -87,7 +87,7 @@ export default function HomePage() {
         },
       };
       const promise = api.delete(`/delete-transaction/${id}`, config);
-      promise.then(window.location.reload());
+      promise.then(navigate("/"));
       promise.catch((err) => alert(err.response.data));
     }
   }
@@ -178,7 +178,7 @@ const TransactionsContainer = styled.article`
   background-color: #fff;
   color: #000;
   border-radius: 5px;
-  padding: 16px 16px 0px 16px;
+  padding-top: 16px;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
@@ -193,7 +193,7 @@ const TransactionsContainer = styled.article`
     bottom: 0px;
     background-color: white;
     min-height: 32px;
-    padding-bottom: 16px;
+    padding: 0px 16px 16px;
     box-shadow: 0 -10px 1px -10px rgba(0, 0, 0, 0.5);
     strong {
       font-weight: 700;
@@ -255,6 +255,7 @@ const ListItemContainer = styled.li`
   margin-bottom: 8px;
   color: #000000;
   margin-right: 13px;
+  padding: 0px 16px;
   div span {
     color: #c6c6c6;
     margin-right: 10px;
