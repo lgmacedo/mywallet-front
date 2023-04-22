@@ -32,7 +32,7 @@ export default function HomePage() {
       const promise = api.get("/transactions", config);
       promise.then(transactionsSuccess);
     }
-  }, [transactions]);
+  }, []);
 
   function transactionsSuccess(res) {
     const { nome, transactions } = res.data;
@@ -52,8 +52,8 @@ export default function HomePage() {
   }
 
   function lougoutSuccess(res) {
-    navigate("/");
     localStorage.clear();
+    navigate("/");
   }
 
   function logoutFailed(err) {
@@ -82,9 +82,19 @@ export default function HomePage() {
         },
       };
       const promise = api.delete(`/delete-transaction/${id}`, config);
-      promise.then(setTransactions([...transactions]));
+      promise.then(apagarRegistroSuccess);
       promise.catch((err) => alert(err.response.data));
     }
+  }
+
+  function apagarRegistroSuccess(){
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user}`,
+      },
+    };
+    const promise = api.get("/transactions", config);
+    promise.then(transactionsSuccess);
   }
 
   return (
