@@ -33,7 +33,7 @@ export default function HomePage() {
       promise.then(transactionsSuccess);
       promise.catch(transactionsFailed);
     }
-  }, []);
+  }, [transactions]);
 
   function transactionsSuccess(res) {
     const { nome, transactions } = res.data;
@@ -79,6 +79,19 @@ export default function HomePage() {
     navigate(`/editar-registro/${tipo}?id=${id}`);
   }
 
+  function apagarRegistro(id) {
+    if (window.confirm("Confirme a deleção da transação")) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user}`,
+        },
+      };
+      const promise = api.delete(`/delete-transaction/${id}`, config);
+      promise.then(setTransactions([...transactions]));
+      promise.catch((err) => alert(err.response.data));
+    }
+  }
+
   return (
     <HomeContainer>
       <Header>
@@ -99,6 +112,7 @@ export default function HomePage() {
               <Value color={t.tipo}>
                 {t.valor.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
               </Value>
+              <DeleteIcon onClick={() => apagarRegistro(t._id)}>x</DeleteIcon>
             </ListItemContainer>
           ))}
         </ul>
@@ -185,6 +199,9 @@ const TransactionsContainer = styled.article`
       font-weight: 700;
       text-transform: uppercase;
     }
+    ul {
+      position: relative;
+    }
   }
 `;
 const EmptyTransactionsContainer = styled.article`
@@ -237,7 +254,7 @@ const ListItemContainer = styled.li`
   align-items: center;
   margin-bottom: 8px;
   color: #000000;
-  margin-right: 10px;
+  margin-right: 13px;
   div span {
     color: #c6c6c6;
     margin-right: 10px;
@@ -245,4 +262,13 @@ const ListItemContainer = styled.li`
   strong {
     cursor: pointer;
   }
+`;
+
+const DeleteIcon = styled.p`
+  position: absolute;
+  right: 10px;
+  color: #c6c6c6;
+  font-weight: 400;
+  line-height: 18.78px;
+  cursor: pointer;
 `;
