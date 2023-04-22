@@ -31,18 +31,13 @@ export default function HomePage() {
       };
       const promise = api.get("/transactions", config);
       promise.then(transactionsSuccess);
-      promise.catch(transactionsFailed);
     }
-  }, []);
+  }, [transactions]);
 
   function transactionsSuccess(res) {
     const { nome, transactions } = res.data;
     setName(nome);
     setTransactions(transactions.reverse());
-  }
-
-  function transactionsFailed(err) {
-    alert("Erro inesperado. Tente novamente.");
   }
 
   function logout() {
@@ -57,8 +52,8 @@ export default function HomePage() {
   }
 
   function lougoutSuccess(res) {
-    localStorage.clear();
     navigate("/");
+    localStorage.clear();
   }
 
   function logoutFailed(err) {
@@ -87,7 +82,7 @@ export default function HomePage() {
         },
       };
       const promise = api.delete(`/delete-transaction/${id}`, config);
-      promise.then(navigate("/home"));
+      promise.then(setTransactions([...transactions]));
       promise.catch((err) => alert(err.response.data));
     }
   }
